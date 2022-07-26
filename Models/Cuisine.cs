@@ -1,11 +1,16 @@
-using System;
+using System.Collections.Generic;
 
 namespace Best_Restaurants.Models
 {
-    public class ErrorViewModel
+  public class Cuisine
+  {
+    public Cuisine()
     {
-        public string RequestId { get; set; }
-
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+      this.Restaurants = new HashSet<Restaurant>();
     }
+
+    public int CuisineId { get; set; }
+    public string Name { get; set; }
+    public virtual ICollection<Restaurant> Restaurants { get; set; }
+  }
 }
