@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Best_Restaurants.Models.Review
+
+<h4>Add a Review</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description)
+  
+  @Html.LabelFor(model => model.Restaurant)
+  @Html.DropDownList("RestaurantId")
+  <br>
+
+  <input type="submit" value="Add Review" class="btn btn-default" />
+}
+<br>
+<br>
+<p>@Html.ActionLink("Show all Reviews", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
