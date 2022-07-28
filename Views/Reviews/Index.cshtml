@@ -14,7 +14,7 @@
 
 @foreach (Review review in Model)
 {
-  <li>@Html.ActionLink($"{review.Description}", "Details", new { id = review.ReviewId }) | @review.Restaurant.Name</li>
+  <li>@Html.ActionLink($"{review.Description}", "Details", new { id = review.ReviewId })</li>
 }
 
 <p>@Html.ActionLink("Add new Review", "Create")</p>

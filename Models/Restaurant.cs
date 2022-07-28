@@ -11,6 +11,7 @@ namespace Best_Restaurants.Models
     public string Location { get; set; }
     public string Rating { get; set; }
     public int CuisineId { get; set; }
+    public int ReviewId { get; set; }
     public virtual Cuisine Cuisine { get; set; }
   }
 }
