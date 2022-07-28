@@ -1,75 +1,75 @@
-// using Microsoft.AspNetCore.Mvc.Rendering;
-// using Microsoft.EntityFrameworkCore;
-// using Microsoft.AspNetCore.Mvc;
-// using Best_Restaurants.Models;
-// using System.Collections.Generic;
-// using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Best_Restaurants.Models;
+using System.Collections.Generic;
+using System.Linq;
 
-// namespace Best_Restaurants.Controllers
-// {
-//   public class ReviewsController : Controller
-//   {
-//     private readonly Best_RestaurantsContext _db;
+namespace Best_Restaurants.Controllers
+{
+  public class ReviewsController : Controller
+  {
+    private readonly Best_RestaurantsContext _db;
 
-//     public ReviewsController(Best_RestaurantsContext db)
-//     {
-//       _db = db;
-//     }
+    public ReviewsController(Best_RestaurantsContext db)
+    {
+      _db = db;
+    }
 
-//     public ActionResult Index()
-//     {
-//       List<Restaurant> model = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
-//       return View(model);
-//     }
+    public ActionResult Index()
+    {
+      List<Review> model = _db.Reviews.Include(review => review.Restaurant).ToList();
+      return View(model);
+    }
 
-//     public ActionResult Create()
-//     {
-//       ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
-//       return View();
-//     }
+    public ActionResult Create()
+    {
+      ViewBag.RestaurantId = new SelectList(_db.Restaurants, "RestaurantId", "Name");
+      return View();
+    }
 
-//     [HttpPost]
-//     public ActionResult Create(Restaurant restaurant)
-//     {
-//       _db.Restaurants.Add(restaurant);
-//       _db.SaveChanges();
-//       return RedirectToAction("Index");
-//     }
+    [HttpPost]
+    public ActionResult Create(Review review)
+    {
+      _db.Reviews.Add(review);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
-//     public ActionResult Details(int id)
-//     {
-//       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == id);
-//       return View(thisRestaurant);
-//     }
+    public ActionResult Details(int id)
+    {
+      Review thisReview = _db.Reviews.FirstOrDefault(review => review.ReviewId == id);
+      return View(thisReview);
+    }
 
-//     public ActionResult Edit(int id)
-//     {
-//       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == id);
-//       ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
-//       return View(thisRestaurant);
-//     }
+    public ActionResult Edit(int id)
+    {
+      Review thisReview = _db.Reviews.FirstOrDefault(review => review.ReviewId == id);
+      ViewBag.RestaurantId = new SelectList(_db.Restaurants, "RestaurantId", "Name");
+      return View(thisReview);
+    }
 
-//     [HttpPost]
-//     public ActionResult Edit(Restaurant restaurant)
-//     {
-//       _db.Entry(restaurant).State = EntityState.Modified;
-//       _db.SaveChanges();
-//       return RedirectToAction("Index");
-//     }
+    [HttpPost]
+    public ActionResult Edit(Review review)
+    {
+      _db.Entry(review).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
 
-//     public ActionResult Delete(int id)
-//     {
-//       var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == id);
-//       return View(thisRestaurant);
-//     }
+    public ActionResult Delete(int id)
+    {
+      var thisReview = _db.Reviews.FirstOrDefault(review => review.ReviewId == id);
+      return View(thisReview);
+    }
 
-//     [HttpPost, ActionName("Delete")]
-//     public ActionResult DeleteConfirmed(int id)
-//     {
-//       var thisRestaurant = _db.Restaurants.FirstOrDefault(restaurant => restaurant.RestaurantId == id);
-//       _db.Restaurants.Remove(thisRestaurant);
-//       _db.SaveChanges();
-//       return RedirectToAction("Index");
-//     }
-//   }
-// }
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      var thisReview = _db.Reviews.FirstOrDefault(review => review.ReviewId == id);
+      _db.Reviews.Remove(thisReview);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+  }
+}
